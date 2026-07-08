@@ -1,0 +1,16 @@
+model_path: checkpoints/exp3/best_model.pth
+test_loss: 0.7037
+test_acc: 84.04%
+checkpoint_epoch: 28
+checkpoint_best_acc: 84.58%
+per_class_accuracy:
+  airplane: 86.30%
+  automobile: 92.70%
+  bird: 75.60%
+  cat: 70.40%
+  deer: 83.40%
+  dog: 76.60%
+  frog: 88.50%
+  horse: 85.80%
+  ship: 90.80%
+  truck: 90.30%

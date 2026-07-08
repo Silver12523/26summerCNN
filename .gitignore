@@ -13,10 +13,10 @@ env/
 logs/
 *.log
 
-# Dataset, trained models, and generated experiment outputs
+# Local dataset and trained models
+cifar/
 data/
 checkpoints/
-results/
 *.pth
 *.pt
 

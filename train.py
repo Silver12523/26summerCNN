@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import os
+from datetime import datetime
 from pathlib import Path
 
 # Work around a common Windows/Anaconda OpenMP duplicate runtime issue.
@@ -20,6 +21,8 @@ from utils import (
     save_checkpoint,
     save_confusion_matrix,
     save_history_csv,
+    save_json,
+    save_text,
     set_seed,
     train_one_epoch,
 )
@@ -42,6 +45,7 @@ def parse_args():
     parser.add_argument("--no_augmentation", action="store_true")
     parser.add_argument("--checkpoint_dir", type=str, default="checkpoints")
     parser.add_argument("--result_dir", type=str, default="results")
+    parser.add_argument("--run_name", type=str, default=None)
     return parser.parse_args()
 
 
@@ -51,6 +55,12 @@ def main():
 
     device = get_device()
     print(f"Using device: {device}")
+
+    run_name = args.run_name or datetime.now().strftime("%Y%m%d_%H%M%S")
+    checkpoint_dir = Path(args.checkpoint_dir) / run_name
+    result_dir = Path(args.result_dir) / run_name
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    result_dir.mkdir(parents=True, exist_ok=True)
 
     train_loader, val_loader, test_loader = get_dataloaders(
         data_dir=args.data_dir,
@@ -72,11 +82,6 @@ def main():
         weight_decay=args.weight_decay,
     )
     scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=args.epochs)
-
-    checkpoint_dir = Path(args.checkpoint_dir)
-    result_dir = Path(args.result_dir)
-    checkpoint_dir.mkdir(parents=True, exist_ok=True)
-    result_dir.mkdir(parents=True, exist_ok=True)
 
     history = []
     best_val_acc = 0.0
@@ -119,6 +124,25 @@ def main():
     print(f"Final test_loss={test_loss:.4f} test_acc={test_acc * 100:.2f}%")
 
     save_confusion_matrix(confusion, CIFAR10_CLASSES, result_dir / "confusion_matrix.png")
+    save_json(result_dir / "summary.json", {
+        "run_name": run_name,
+        "best_epoch": checkpoint["epoch"],
+        "best_val_acc": float(best_val_acc),
+        "test_loss": float(test_loss),
+        "test_acc": float(test_acc),
+        "checkpoint_path": str(best_model_path),
+        "result_dir": str(result_dir),
+        "args": {key: value for key, value in vars(args).items()},
+    })
+    save_text(result_dir / "notes.txt", "\n".join([
+        f"run_name: {run_name}",
+        f"best_epoch: {checkpoint['epoch']}",
+        f"best_val_acc: {best_val_acc * 100:.2f}%",
+        f"test_acc: {test_acc * 100:.2f}%",
+        f"checkpoint_path: {best_model_path}",
+        f"result_dir: {result_dir}",
+        f"command: python train.py --data_dir {args.data_dir} --epochs {args.epochs} --batch_size {args.batch_size} --lr {args.lr} --run_name {run_name}",
+    ]))
     print(f"Training log and figures saved to: {result_dir}")
 
 

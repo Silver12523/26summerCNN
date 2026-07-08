@@ -1,0 +1,27 @@
+{
+  "run_name": "smoke_check",
+  "best_epoch": 1,
+  "best_val_acc": 0.2,
+  "test_loss": 2.288483142852783,
+  "test_acc": 0.22,
+  "checkpoint_path": "checkpoints\\smoke_check\\best_model.pth",
+  "result_dir": "results\\smoke_check",
+  "args": {
+    "data_dir": "cifar",
+    "epochs": 1,
+    "batch_size": 64,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.5,
+    "num_workers": 0,
+    "val_size": 5000,
+    "train_subset": 100,
+    "val_subset": 50,
+    "test_subset": 50,
+    "seed": 42,
+    "no_augmentation": false,
+    "checkpoint_dir": "checkpoints",
+    "result_dir": "results",
+    "run_name": "smoke_check"
+  }
+}

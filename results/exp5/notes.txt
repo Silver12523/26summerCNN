@@ -1,0 +1,7 @@
+run_name: exp5
+best_epoch: 29
+best_val_acc: 87.04%
+test_acc: 86.41%
+checkpoint_path: checkpoints\exp5\best_model.pth
+result_dir: results\exp5
+command: python train.py --data_dir cifar --epochs 30 --batch_size 128 --lr 0.001 --run_name exp5

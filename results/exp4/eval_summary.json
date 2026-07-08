@@ -1,0 +1,20 @@
+{
+  "model_path": "checkpoints/exp4/best_model.pth",
+  "test_loss": 0.39908625354766847,
+  "test_acc": 0.8665,
+  "checkpoint_epoch": 27,
+  "checkpoint_best_acc": 0.8762,
+  "seed": 42,
+  "per_class_accuracy": {
+    "airplane": 0.9039999842643738,
+    "automobile": 0.9440000057220459,
+    "bird": 0.7829999923706055,
+    "cat": 0.6980000138282776,
+    "deer": 0.8610000014305115,
+    "dog": 0.8140000104904175,
+    "frog": 0.9200000166893005,
+    "horse": 0.8920000195503235,
+    "ship": 0.921999990940094,
+    "truck": 0.9269999861717224
+  }
+}

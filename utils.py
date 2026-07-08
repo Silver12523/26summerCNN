@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import random
 from pathlib import Path
 
@@ -75,6 +76,18 @@ def evaluate(model, loader, criterion, device, num_classes: int = 10):
     avg_loss = running_loss / total
     accuracy = correct / total
     return avg_loss, accuracy, confusion
+
+
+def save_text(path, content: str) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+
+
+def save_json(path, payload) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
 def save_checkpoint(path, model, optimizer, epoch, best_acc, args) -> None:

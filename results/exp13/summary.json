@@ -1,0 +1,27 @@
+{
+  "run_name": "exp13",
+  "best_epoch": 42,
+  "best_val_acc": 0.8878,
+  "test_loss": 0.36682996258735656,
+  "test_acc": 0.8894,
+  "checkpoint_path": "checkpoints\\exp13\\best_model.pth",
+  "result_dir": "results\\exp13",
+  "args": {
+    "data_dir": "cifar",
+    "epochs": 50,
+    "batch_size": 64,
+    "lr": 0.001,
+    "weight_decay": 5e-05,
+    "dropout": 0.15,
+    "num_workers": 2,
+    "val_size": 5000,
+    "train_subset": null,
+    "val_subset": null,
+    "test_subset": null,
+    "seed": 42,
+    "no_augmentation": false,
+    "checkpoint_dir": "checkpoints",
+    "result_dir": "results",
+    "run_name": "exp13"
+  }
+}

@@ -1,0 +1,7 @@
+run_name: smoke_check
+best_epoch: 1
+best_val_acc: 20.00%
+test_acc: 22.00%
+checkpoint_path: checkpoints\smoke_check\best_model.pth
+result_dir: results\smoke_check
+command: python train.py --data_dir cifar --epochs 1 --batch_size 64 --lr 0.001 --run_name smoke_check

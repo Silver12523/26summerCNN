@@ -1,0 +1,7 @@
+run_name: exp12
+best_epoch: 47
+best_val_acc: 89.90%
+test_acc: 88.73%
+checkpoint_path: checkpoints\exp12\best_model.pth
+result_dir: results\exp12
+command: python train.py --data_dir cifar --epochs 50 --batch_size 64 --lr 0.001 --run_name exp12
