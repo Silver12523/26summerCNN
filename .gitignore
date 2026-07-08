@@ -1,0 +1,33 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Logs
+logs/
+*.log
+
+# Dataset, trained models, and generated experiment outputs
+data/
+checkpoints/
+results/
+*.pth
+*.pt
+
+# Secrets or local config
+.env
+
+# Office temporary files
+~$*
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
